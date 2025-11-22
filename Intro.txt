@@ -1,0 +1,35 @@
+
+
+Hi Team , I'm Udit, a SDET turned Backend Engineer. 
+My path through backend engineering and software testing has shaped me into someone 
+who builds systems that are fast reliable and ready for real world scale. 
+I enjoy creating solutions that make an impact. They stand strong in production 
+because every design decision is inspired by both development and testing insight.
+
+At WizCommerce I work as a Backend Software Development Engineer where I focus on 
+building and optimizing services that support heavy data and high traffic workloads. 
+A recent achievement I am proud of was improving an AI-based image processing pipeline 
+through query optimization and implementing async IO which resulted in close to a 50% increase in performance. 
+The project helped me sharpen the ability to identify patterns in system behaviour design efficient solutions 
+and deliver measurable improvements that directly support the business.
+
+Before my current role I worked as an SDET at Nykaa. That experience shaped my habit of 
+thinking through edge cases and anticipating user behaviour which naturally influences 
+the way I write APIs handle data flows and structure system logic. I learned to question 
+assumptions and design services that remain stable in unexpected scenarios. This focus on 
+reliability shortens the dev QA cycle and helps teams ship features with greater confidence.
+
+One project that captures my passion for solving meaningful problems is QureMe an 
+AI based brain MRI tumor detection application. I built the backend using 
+Python and Flask supported a React interface and trained a CNN model on more than 
+8000 MRI scans achieving accuracy above 90%. It reflects my ability to work across 
+the stack and my interest in building technology that creates real impact.
+
+I bring experience with Java, Spring Boot, Python, Django, RESTful APIs, FastAPI, 
+Selenium, SQL, AWS and more along with a strong foundation from my BE in Computer Science. 
+What I offer is not only technical depth but also a mindset that blends precision with creativity. 
+I take ownership of my code that is clean scalable and test ready because I believe this 
+combination leads to products that are dependable and a delight to use.
+
+
+

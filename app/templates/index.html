@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRI Scan Tumor Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #A8E0D8, #F9FBCB); /* Soft color gradient */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            transition: background-color 0.5s, color 0.5s;
+        }
+        header {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent header */
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        header img {
+            height: 40px; /* Icon height */
+            cursor: pointer; /* Make it clickable */
+        }
+        h1 {
+            color: #2E3A4F; /* Darker color for better contrast */
+            margin: 0;
+            flex-grow: 1; /* Center the heading */
+            text-align: center; /* Center text */
+        }
+        .toggle-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px; /* Size of the toggle icon */
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            animation: fadeIn 0.8s;
+            width: 90%;
+            max-width: 400px;
+            margin: 100px auto 20px; /* Add margin at the top to prevent overlap with the header */
+            backdrop-filter: blur(10px); /* Smooth background blur */
+        }
+        input[type="file"] {
+            display: none;
+        }
+        label {
+            background: #4CAF50; /* Green color */
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        label:hover {
+            background: #45A049; /* Darker green */
+        }
+        .upload-button {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .image-preview {
+            margin: 20px 0;
+            display: none;
+        }
+        .image-preview img {
+            max-width: 60%; /* Smaller preview */
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s; /* Smooth image transition */
+        }
+        .image-preview img:hover {
+            transform: scale(1.05); /* Zoom effect on hover */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+    <script>
+        function previewImage(event) {
+            const previewContainer = document.getElementById('image-preview');
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function() {
+                const img = document.createElement('img');
+                img.src = reader.result;
+                previewContainer.innerHTML = ''; // Clear previous image
+                previewContainer.appendChild(img);
+                previewContainer.style.display = 'block'; // Show the preview
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Toggle dark/light mode
+        function toggleMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const icon = document.getElementById('toggle-icon');
+
+            if (body.classList.contains('dark-mode')) {
+                body.style.background = '#1E1E1E';
+                body.style.color = '#FFF';
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
+                body.style.background = 'linear-gradient(to right, #A8E0D8, #F9FBCB)';
+                body.style.color = '#333';
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <a href="/"><img src="path_to_your_icon_image.png" alt="App Icon"></a>
+        <h1>QureMe</h1>
+        <button class="toggle-button" onclick="toggleMode()">
+            <i id="toggle-icon" class="fas fa-sun"></i>
+        </button>
+    </header>
+    <div class="container">
+        <h1>MRI Tumor Detection</h1>
+        <p style="color: #333;">Upload your MRI scan to detect if there's a tumor.</p>
+        <form action="/predict" method="POST" enctype="multipart/form-data">
+            <input type="file" id="file" name="file" accept="image/*" required onchange="previewImage(event)">
+            <label for="file">Choose an MRI Scan</label>
+            <div class="image-preview" id="image-preview"></div>
+            <div class="upload-button" style="margin-top: 30px;"> <!-- Increased margin -->
+                <button type="submit" style="background: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; transition: background 0.3s;">Upload & Detect</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

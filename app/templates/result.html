@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #A8E0D8, #F9FBCB); /* Soft color gradient */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            transition: background-color 0.5s, color 0.5s;
+        }
+        header {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent header */
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        header img {
+            height: 40px; /* Icon height */
+            cursor: pointer; /* Make it clickable */
+        }
+        h1 {
+            color: #2E3A4F; /* Darker color for better contrast */
+            margin: 0;
+            flex-grow: 1; /* Center the heading */
+            text-align: center; /* Center text */
+        }
+        .toggle-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px; /* Size of the toggle icon */
+        }
+        .result-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            animation: fadeIn 0.8s;
+            width: 90%;
+            max-width: 400px;
+            margin: 100px auto 20px; /* Add margin at the top to prevent overlap with the header */
+            backdrop-filter: blur(10px); /* Smooth background blur */
+        }
+        .result {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #4CAF50; /* Green background for results */
+            color: white;
+            transition: transform 0.3s; /* Smooth transition */
+        }
+        .result:hover {
+            transform: scale(1.05); /* Zoom effect on hover */
+        }
+        .img-container {
+            margin: 20px 0;
+            transition: transform 0.3s;
+        }
+        .img-container:hover {
+            transform: scale(1.05); /* Zoom effect on hover */
+        }
+        img {
+            max-width: 60%; /* Smaller preview */
+            height: auto;
+            border-radius: 8px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+    <script>
+        // Toggle dark/light mode
+        function toggleMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const icon = document.getElementById('toggle-icon');
+
+            if (body.classList.contains('dark-mode')) {
+                body.style.background = '#1E1E1E';
+                body.style.color = '#FFF';
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
+                body.style.background = 'linear-gradient(to right, #A8E0D8, #F9FBCB)';
+                body.style.color = '#333';
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <a href="/"><img src="path_to_your_icon_image.png" alt="App Icon"></a>
+        <h1>QureMe</h1>
+        <button class="toggle-button" onclick="toggleMode()">
+            <i id="toggle-icon" class="fas fa-sun"></i>
+        </button>
+    </header>
+    <div class="result-container">
+        <h1>Detection Result</h1>
+        <div class="result">{{ prediction }}</div> <!-- Enhanced result appearance -->
+        <div class="img-container">
+            <img src="{{ url_for('static', filename='uploads/' + request.files['file'].filename) }}" alt="Uploaded MRI Scan">
+        </div>
+        <button onclick="window.location.href='/'">Upload Another Scan</button>
+    </div>
+</body>
+</html>
